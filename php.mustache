@@ -1,0 +1,79 @@
+<?php
+
+// Get cURL resource
+$ch = curl_init();
+
+// Set url
+curl_setopt($ch, CURLOPT_URL, '{{{url.fullpath}}}');
+
+// Set method
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '{{{request.method}}}');
+
+// Set options
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+{{#headers.has_headers}}
+// Set headers
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+{{#headers.header_list}}
+  "{{{header_name}}}: {{{header_value}}}",
+{{/headers.header_list}} ]
+);
+{{/headers.has_headers}}
+{{! ----- }}
+{{#body.has_raw_body}}
+// Set header
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: text/plain']);
+
+// Create body
+$body = '{{{body.raw_body}}}';
+{{/body.has_raw_body}}
+{{! ----- }}
+{{#body.has_long_body}}
+// Create body
+$body = 'set your body string;
+{{/body.has_long_body}}
+{{! ----- }}
+{{#body.has_url_encoded_body}}
+// Create body
+$body = '{{#body.url_encoded_body}}{{{name}}}={{{value}}}&{{/body.url_encoded_body}}';
+{{/body.has_url_encoded_body}}
+{{! ----- }}
+{{#body.has_multipart_body}}
+// Create body
+$body = [
+{{#body.multipart_body}}
+  "{{{name}}}" => "{{{value}}}",
+{{/body.multipart_body}}
+  ];
+{{/body.has_multipart_body}}
+{{! ----- }}
+{{#body.has_json_body}}
+// Set header
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type:application/json']);
+
+// Create body
+$json_array = {{{body.json_body_object}}}; 
+$body = json_encode($json_array);
+{{/body.has_json_body}}
+
+{{#body}}
+// Set body
+curl_setopt($ch, CURLOPT_POST, 1); 
+curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+{{/body}}
+
+// Send the request & save response to $resp
+$resp = curl_exec($ch);
+
+if(!$resp) {
+  die('Error: "' . curl_error($ch) . '" - Code: ' . curl_errno($ch));
+} else {
+  echo "Response HTTP Status Code : " . curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  echo "\nResponse HTTP Body : " . $resp;
+}
+
+// Close request to clear up some resources
+curl_close($ch);
+
+?>
