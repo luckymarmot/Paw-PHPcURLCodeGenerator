@@ -10,7 +10,7 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: NoL4SeS6SuyEUvG0L9mvV0BGc7TGs8mMiUXKw0938GkFb79ZNOvl5yAfJK3qE2KyHFHwNtX4EQoNP970/TqktnODbDCGTWl3gUT3rRzjZHK4MyLy0hw/YdQ8WiWc80OEf4fYPCVij4+xajq/xi8Sh5Y8taVUvpqzabPepHLHDUE=
+    secure: gtnhnUR1GyzdpKvqHNGq96QSseTrchox/qcQCXqynhS9fop+vO4d+elsgo0Uuab3ttpZzbfj7FM/UEeRoezBJz+flVmTxwmf4LX0rZA+z2CJzZ5hd0a5BjVMWyztCap8tHgjPsJrhvrkYlD7RE9JbeNmDLuUEGWtCAvXWEzXWVM=
   file: build/PHPcURLCodeGenerator.zip
   skip_cleanup: true
   on:
