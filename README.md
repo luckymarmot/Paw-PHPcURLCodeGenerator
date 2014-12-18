@@ -2,13 +2,29 @@
 
 # PHP + cURL Code Generator (Paw Extension)
 
-This a Paw Extension that generates code for PHP using the [cURL](http://en.wikipedia.org/wiki/CURL) library.
+A [Paw Extension](http://luckymarmot.com/paw/extensions/) that generates PHP code for the [cURL](http://php.net/manual/en/book.curl.php) library.
 
 ## Installation
 
-* `npm install`
-* `cake build`
-* `cake install`
+Easily install this Paw Extension: [Install PHP + cURL Code Generator](http://luckymarmot.com/paw/extensions/PHPcURLCodeGenerator)
+
+## Development
+
+### Build & Install
+
+```shell
+npm install
+cake build
+cake install
+```
+
+### Watch
+
+During development, watch for changes:
+
+```shell
+cake watch
+```
 
 ## License
 
