@@ -109,5 +109,6 @@ PHPcURLCodeGenerator.identifier =
 PHPcURLCodeGenerator.title =
     "PHP (cURL)"
 PHPcURLCodeGenerator.fileExtension = "php"
+PHPcURLCodeGenerator.languageHighlighter = "php"
 
 registerCodeGenerator PHPcURLCodeGenerator
