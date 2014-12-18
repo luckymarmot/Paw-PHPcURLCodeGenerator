@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/LuckyMarmot/Paw-PHPcURLCodeGenerator.svg?branch=master)](https://travis-ci.org/LuckyMarmot/Paw-PHPcURLCodeGenerator)
+[![Build Status](https://travis-ci.org/luckymarmot/Paw-PHPcURLCodeGenerator.svg?branch=master)](https://travis-ci.org/luckymarmot/Paw-PHPcURLCodeGenerator)
 
 # PHP + cURL Code Generator (Paw Extension)
 
@@ -18,7 +18,7 @@ Copyright © 2014 Paw Inc.
 
 ## Contributors
 
-Created by Quentin Rousseau ([@kwent](https://github.com/kwent)). See [Contributors](https://github.com/LuckyMarmot/Paw-PHPcURLCodeGenerator/graphs/contributors).
+Created by Quentin Rousseau ([@kwent](https://github.com/kwent)). See [Contributors](https://github.com/luckymarmot/Paw-PHPcURLCodeGenerator/graphs/contributors).
 
 ## Credits
 
