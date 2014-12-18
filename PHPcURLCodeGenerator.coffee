@@ -105,8 +105,9 @@ PHPcURLCodeGenerator = ->
 
 
 PHPcURLCodeGenerator.identifier =
-    "com.luckymarmot.PawExtensions.PHPcURLCodeGenerator";
+    "com.luckymarmot.PawExtensions.PHPcURLCodeGenerator"
 PHPcURLCodeGenerator.title =
-    "PHP (cURL)";
+    "PHP (cURL)"
+PHPcURLCodeGenerator.fileExtension = "php"
 
 registerCodeGenerator PHPcURLCodeGenerator
