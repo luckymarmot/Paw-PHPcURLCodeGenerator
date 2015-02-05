@@ -36,7 +36,12 @@ $body = 'set your body string;
 {{! ----- }}
 {{#body.has_url_encoded_body}}
 // Create body
-$body = '{{#body.url_encoded_body}}{{{name}}}={{{value}}}&{{/body.url_encoded_body}}';
+$body = [
+{{#body.url_encoded_body}}
+  "{{{name}}}" => "{{{value}}}",
+{{/body.url_encoded_body}}
+  ];
+$body = http_build_query($body);
 {{/body.has_url_encoded_body}}
 {{! ----- }}
 {{#body.has_multipart_body}}
@@ -59,7 +64,7 @@ $body = json_encode($json_array);
 
 {{#body}}
 // Set body
-curl_setopt($ch, CURLOPT_POST, 1); 
+curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
 {{/body}}
 
