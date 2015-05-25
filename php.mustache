@@ -12,15 +12,7 @@ curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '{{{request.method}}}');
 // Set options
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-{{#headers.has_headers}}
-// Set headers
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-{{#headers.header_list}}
-  "{{{header_name}}}: {{{header_value}}}",
-{{/headers.header_list}} ]
-);
-{{/headers.has_headers}}
-{{! ----- }}
+
 {{#body.has_raw_body}}
 // Set header
 curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: text/plain']);
@@ -61,7 +53,16 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type:application/json']);
 $json_array = {{{body.json_body_object}}}; 
 $body = json_encode($json_array);
 {{/body.has_json_body}}
-
+{{! ----- }}
+{{#headers.has_headers}}
+  // Set headers
+  curl_setopt($ch, CURLOPT_HTTPHEADER, [
+  {{#headers.header_list}}
+    "{{{header_name}}}: {{{header_value}}}",
+  {{/headers.header_list}} ]
+  );
+{{/headers.has_headers}}
+{{! ----- }}
 {{#body}}
 // Set body
 curl_setopt($ch, CURLOPT_POST, 1);
