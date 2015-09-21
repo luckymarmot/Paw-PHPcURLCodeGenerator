@@ -22,9 +22,6 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
 {{/headers.has_headers}}
 {{! ----- }}
 {{#body.has_raw_body}}
-// Set header
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: text/plain']);
-
 // Create body
 $body = '{{{body.raw_body}}}';
 {{/body.has_raw_body}}
@@ -54,9 +51,6 @@ $body = [
 {{/body.has_multipart_body}}
 {{! ----- }}
 {{#body.has_json_body}}
-// Set header
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type:application/json']);
-
 // Create body
 $json_array = {{{body.json_body_object}}}; 
 $body = json_encode($json_array);
