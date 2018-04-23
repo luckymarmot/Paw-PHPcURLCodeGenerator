@@ -6,9 +6,7 @@ const name = 'PHPcURLCodeGenerator'
 const config = {
   target: 'node-webkit',
   mode: 'production',
-  entry: {
-    main: `./src/PHPcURLCodeGenerator.js`
-  },
+  entry: './src/PHPcURLCodeGenerator.js',
   output: {
     path: path.resolve(__dirname, `./build/com.luckymarmot.PawExtensions.${name}`),
     publicPath: '/build/',
@@ -21,7 +19,7 @@ const config = {
         use: 'babel-loader'
       },
       {
-        test: /\.mustache$/,
+        test: /\.php$/,
         use: 'raw-loader'
       }
     ]
