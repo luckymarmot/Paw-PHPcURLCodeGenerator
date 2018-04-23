@@ -36,48 +36,42 @@ const getHeadersString = request => {
 // 
 
 const getJsonBodyObject = (object, indent = 0) => {
-    let s;
-    let value;
+    // null
     if (object === null) {
-        s = "null";
-    } else if (typeof(object) === 'string') {
-        s = `\"${addslashes(object)}\"`;
-    } else if (typeof(object) === 'number') {
-        s = `${object}`;
-    } else if (typeof(object) === 'boolean') {
-        s = `${object ? "true" : "false"}`;
-    } else if (typeof(object) === 'object') {
-        const indent_str = Array(indent + 1).join('    ');
-        const indent_str_children = Array(indent + 2).join('    ');
-        if (object.length != null) {
-            s = "[\n" +
-                ((() => {
-                    const result = [];
-                    for (value of Array.from(object)) {                             result.push(`${indent_str_children}${getJsonBodyObject(value, indent+1)}`);
-                    }
-                    return result;
-                })()).join(',\n') +
-                `\n${indent_str}]`;
-        } else {
-            s = "[\n" +
-                ((() => {
-                    const result1 = [];
-                    for (let key in object) {
-                        value = object[key];
-                        result1.push(`${indent_str_children}\"${addslashes(key)}\" => ${getJsonBodyObject(value, indent+1)}`);
-                    }
-                    return result1;
-                })()).join(',\n') +
-                `\n${indent_str}]`;
-        }
+        return null
     }
-
-    return s;
+    // string
+    else if ('string' === typeof object) {
+        return `\"${addslashes(object)}\"`
+    }
+    // number
+    else if ('number' === typeof object) {
+        return object
+    }
+    // boolean
+    else if ('boolean' === typeof object) {
+        return object ? 'true' : 'false'
+    }
+    // array
+    else if ('object' === typeof object && object.length != null) {
+        const indent_str = Array(indent + 1).join('  ')
+        const indent_str_children = Array(indent + 2).join('  ')
+        const lines = object.map(value => `${ indent_str_children }${ getJsonBodyObject(value, indent+1) }`)
+        return `[\n${ lines.join(',\n') }\n${ indent_str }]`
+    }
+    // object
+    else if ('object' === typeof object) {
+        const indent_str = Array(indent + 1).join('  ')
+        const indent_str_children = Array(indent + 2).join('  ')
+        const lines = Object.keys(object).map(key => `${ indent_str_children }${ getJsonBodyObject(key) } => ${ getJsonBodyObject(object[key], indent+1) }`)
+        return `[\n${ lines.join(',\n') }\n${ indent_str }]`
+    }
+    return null
 }
 
 const getJsonBodyString = jsonBody => {
     return Mustache.render(require('../templates/body_json.php'), {
-        json_body_object: getJsonBodyObject(jsonBody, 2)
+        json_body_object: getJsonBodyObject(jsonBody)
     })
 }
 
