@@ -4,16 +4,16 @@
 $ch = curl_init();
 
 // set url
-curl_setopt($ch, CURLOPT_URL, '{{{url.fullpath}}}');
+curl_setopt($ch, CURLOPT_URL, {{{url}}});
 
 // set method
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '{{{request.method}}}');
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, {{{method}}});
 
 // return the transfer as a string
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
+{{{timeout}}}
 {{{headers}}}
-
 {{{body}}}
 
 // send the request and save response to $response

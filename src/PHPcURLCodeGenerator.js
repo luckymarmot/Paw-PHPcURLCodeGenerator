@@ -15,13 +15,7 @@ const genStr = str => {
     return `"${escapeDoubleQuotes(str)}"`
 }
 
-// 
-// URL
-// 
-
-const getUrl = request => ({
-    fullpath: request.url
-})
+const removeExtraLines = str => str.replace(/\n{2,}/g, '\n\n')
 
 // 
 // Headers
@@ -143,6 +137,20 @@ const getBodyString = request => {
 }
 
 // 
+// Timeout
+// 
+
+const getTimeout = request => {
+    const timeout = request.timeout
+    if (request.timeout === 0) {
+        return null
+    }
+    return Mustache.render(require('../templates/timeout.php'), {
+        timeout: (request.timeout / 1000)
+    })
+}
+
+// 
 // Code generator
 // 
 
@@ -153,14 +161,15 @@ class PHPcURLCodeGenerator {
     static fileExtension = 'php';
     static languageHighlighter = 'php';
 
-    generate(context, requests, options) {
+    generate(context) {
         const request = context.getCurrentRequest()
-        return Mustache.render(require('../templates/request.php'), {
-            request: context.getCurrentRequest(),
-            method: request.method.toUpperCase(),
-            url: getUrl(request),
+        const str = Mustache.render(require('../templates/request.php'), {
+            url: genStr(request.url),
+            method: genStr(request.method.toUpperCase()),
+            timeout: getTimeout(request),
             headers: getHeadersString(request),
             body: getBodyString(request),
         })
+        return removeExtraLines(str)
     }
 }
