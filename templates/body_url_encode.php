@@ -1,4 +1,4 @@
-// Create body
+// form body
 $body = [
 {{#params}}
   {{{name}}} => {{{value}}},
@@ -6,6 +6,6 @@ $body = [
 ];
 $body = http_build_query($body);
 
-// Set body
+// set body
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $body);

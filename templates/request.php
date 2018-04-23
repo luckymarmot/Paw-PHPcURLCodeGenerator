@@ -1,30 +1,31 @@
 <?php
 
-// Get cURL resource
+// get cURL resource
 $ch = curl_init();
 
-// Set url
+// set url
 curl_setopt($ch, CURLOPT_URL, '{{{url.fullpath}}}');
 
-// Set method
+// set method
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, '{{{request.method}}}');
 
-// Set options
+// return the transfer as a string
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
 {{{headers}}}
 
 {{{body}}}
 
-// Send the request & save response to $resp
-$resp = curl_exec($ch);
+// send the request and save response to $response
+$response = curl_exec($ch);
 
-if(!$resp) {
+// stop if fails
+if (!$response) {
   die('Error: "' . curl_error($ch) . '" - Code: ' . curl_errno($ch));
-} else {
-  echo "Response HTTP Status Code : " . curl_getinfo($ch, CURLINFO_HTTP_CODE);
-  echo "\nResponse HTTP Body : " . $resp;
 }
 
-// Close request to clear up some resources
+echo 'HTTP Status Code: ' . curl_getinfo($ch, CURLINFO_HTTP_CODE) . PHP_EOL;
+echo 'Response Body: ' . $response . PHP_EOL;
+
+// close curl resource to free up system resources 
 curl_close($ch);

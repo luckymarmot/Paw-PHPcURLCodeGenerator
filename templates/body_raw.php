@@ -1,6 +1,6 @@
-// Create body
+// body string
 $body = {{{body}}};
 
-// Set body
+// set body
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
