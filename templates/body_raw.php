@@ -1,5 +1,5 @@
 // Create body
-$body = '{{{raw_body}}}';
+$body = {{{body}}};
 
 // Set body
 curl_setopt($ch, CURLOPT_POST, 1);

@@ -1,9 +1,9 @@
 // Create body
 $body = [
 {{#params}}
-  "{{{name}}}" => "{{{value}}}",
+  {{{name}}} => {{{value}}},
 {{/params}}
-  ];
+];
 
 // Set body
 curl_setopt($ch, CURLOPT_POST, 1);

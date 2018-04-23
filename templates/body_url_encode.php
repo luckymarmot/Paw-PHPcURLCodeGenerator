@@ -1,9 +1,9 @@
 // Create body
 $body = [
 {{#params}}
-  "{{{name}}}" => "{{{value}}}",
+  {{{name}}} => {{{value}}},
 {{/params}}
-  ];
+];
 $body = http_build_query($body);
 
 // Set body

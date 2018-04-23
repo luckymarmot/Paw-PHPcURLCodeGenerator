@@ -1,9 +1,6 @@
 require('./polyfills.js')
 import Mustache from 'mustache'
 
-import template_request from '../templates/request.php'
-
-const addslashes = str => str.replace(/[\\"]/g, '\\$&')
 
 const escapeSimpleQuotes = str => str.replace(/[\\']/g, '\\$&')
 const escapeDoubleQuotes = str => str.replace(/[\\"]/g, '\\$&')
@@ -36,8 +33,7 @@ const getHeadersString = request => {
         return null
     }
     const header_strings = Object.keys(headers).map(name => ({
-        name: addslashes(name),
-        value: addslashes(headers[name]),
+        line: genStr(`${name}: ${headers[name]}`),
     }))
     return Mustache.render(require('../templates/headers.php'), {
         headers: header_strings
@@ -50,8 +46,8 @@ const getHeadersString = request => {
 
 const getUrlEncodedBodyString = urlEncodedParams => {
     const params_strings = Object.keys(urlEncodedParams).map(name => ({
-        name: addslashes(name),
-        value: addslashes(urlEncodedParams[name]),
+        name: genStr(name),
+        value: genStr(urlEncodedParams[name]),
     }))
     return Mustache.render(require('../templates/body_url_encode.php'), {
         params: params_strings
@@ -60,8 +56,8 @@ const getUrlEncodedBodyString = urlEncodedParams => {
 
 const getMultipartBodyString = multipartParams => {
     const params_strings = Object.keys(multipartParams).map(name => ({
-        name: addslashes(name),
-        value: addslashes(multipartParams[name]),
+        name: genStr(name),
+        value: genStr(multipartParams[name]),
     }))
     return Mustache.render(require('../templates/body_multipart.php'), {
         params: params_strings
@@ -70,7 +66,7 @@ const getMultipartBodyString = multipartParams => {
 
 const getRawBodyString = rawBody => {
     return Mustache.render(require('../templates/body_raw.php'), {
-        raw_body: rawBody
+        body: genStr(rawBody)
     })
 }
 
@@ -159,7 +155,7 @@ class PHPcURLCodeGenerator {
 
     generate(context, requests, options) {
         const request = context.getCurrentRequest()
-        return Mustache.render(template_request, {
+        return Mustache.render(require('../templates/request.php'), {
             request: context.getCurrentRequest(),
             method: request.method.toUpperCase(),
             url: getUrl(request),
