@@ -8,33 +8,31 @@ A [Paw Extension](http://luckymarmot.com/paw/extensions/) that generates PHP cod
 
 Easily install this Paw Extension: [Install PHP + cURL Code Generator](http://luckymarmot.com/paw/extensions/PHPcURLCodeGenerator)
 
-## Development
+## Contributing
 
-### Build & Install
+If you want to contribute, this is how to build the extension and install it to your Paw settings:
 
 ```shell
-npm install
-cake build
-cake install
+yarn install # or npm install
+make install
 ```
 
-### Watch
-
-During development, watch for changes:
+To make a distributable archive:
 
 ```shell
-cake watch
+make clean && make archive
 ```
 
 ## License
 
 This Paw Extension is released under the [MIT License](LICENSE). Feel free to fork, and modify!
 
-Copyright © 2014 Paw Inc.
+Copyright © 2014-2018 Paw
 
 ## Contributors
 
-Created by Quentin Rousseau ([@kwent](https://github.com/kwent)). See [Contributors](https://github.com/luckymarmot/Paw-PHPcURLCodeGenerator/graphs/contributors).
+See [Contributors](https://github.com/luckymarmot/Paw-PHPcURLCodeGenerator/graphs/contributors).
+Originally created by Quentin Rousseau ([@kwent](https://github.com/kwent)).
 
 ## Credits
 
